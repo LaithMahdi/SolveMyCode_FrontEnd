@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../config/utils";
-
-const Form = () => {
+import { API_URL } from "../../config/utils";
+const AddingQuestion = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [picture, setPicture] = useState("");
@@ -11,9 +10,9 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // i create this object because hour -1 
+    // i create this object because hour -1
     const now = new Date();
-    now.setHours(now.getHours() + 1); 
+    now.setHours(now.getHours() + 1);
     try {
       const response = await axios.post(API_URL, {
         title: title,
@@ -45,12 +44,12 @@ const Form = () => {
     >
       <div className="col-6">
         {done && (
-          <div class="alert alert-success" role="alert">
+          <div className="alert alert-success" role="alert">
             Post created successfully!
           </div>
         )}
         {error && (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             An error occurred while creating the post.
           </div>
         )}
@@ -83,6 +82,8 @@ const Form = () => {
             id="picture"
             onChange={(e) => setPicture(e.target.files[0])}
             className="form-control"
+            accept=".jpg, .jpeg, .png"
+            size="2097152"
           />
         </div>
         <div>
@@ -94,5 +95,4 @@ const Form = () => {
     </form>
   );
 };
-
-export default Form;
+export default AddingQuestion;

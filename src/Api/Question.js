@@ -21,12 +21,3 @@ export async function getQuestionWithId(id) {
 }  
 
 
-export async function AddQuestion() {
-  try {
-    const response = await axios.post(`${API_URL}/`);
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-}

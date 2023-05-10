@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getAllQuestions } from "../Api/Question";
+import { getAllQuestions } from "../../Api/Question";
 import { Link } from "react-router-dom";
-import { dateFormatMonth } from "../config/utils";
+import { dateFormatMonth } from "../../config/utils";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -17,7 +17,7 @@ const QuestionsPage = () => {
   return (
     <div className="container">
       <h1 className="mt-5">List of questions</h1>
-      <Link to="/AddQuestion" className="btn btn-primary">Add </Link>
+      <Link to="/add" className="btn btn-primary">Add </Link>
       {loading ? (
         <div className="d-flex justify-content-center mt-5">
           <div className="spinner-border" role="status">

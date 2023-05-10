@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { API_URL, getTimeAgo } from "../config/utils";
+import { API_URL, getTimeAgo } from "../../config/utils";
 
 export default function Detail() {
   // get id from url

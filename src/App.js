@@ -1,13 +1,10 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
 import React, { Component } from "react";
-import QuestionsPage from "./pages/QuestionsPage";
+import QuestionsPage from "./pages/Question/QuestionsPage";
 import HomePage from "./pages/HomePage";
-import Detail from "./pages/DetailPage";
-import AddQuestionPage from "./pages/AddQuestionPage";
-
-
+import Detail from "./pages/Question/DetailPage";
+import AddingQuestion from "./pages/Question/AddingQuestion";
 
 const AboutPage = () => <div>About</div>;
 class App extends Component {
@@ -59,9 +56,8 @@ class App extends Component {
             <Route path="/question" element={<QuestionsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/AddQuestion" element={<AddQuestionPage />} />
+            <Route path="/add" element={<AddingQuestion/>} />
           </Routes>
-       
         </div>
       </BrowserRouter>
     );
