@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL, getTimeAgo } from "../../config/utils";
+import axios from "axios";
 
 export default function Detail() {
   // get id from url
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [languages, setLanguages] = useState([]);
   // fecthing data
   useEffect(() => {
     fetch(`${API_URL}/${id}`)
@@ -14,6 +16,11 @@ export default function Detail() {
       .catch((error) => console.error(error));
   }, [id]);
 
+  useEffect(() => {
+    axios.get(`${API_URL}/${id}/languages`).then((response) => {
+      setLanguages(response.data);
+    });
+  }, [id]);
   // if no data found spinner willl still visible
   if (!data) {
     return (
@@ -45,23 +52,30 @@ export default function Detail() {
       <div className="row mt-5 shape">
         <div className="col">
           <div className="box">
-            <h4>{data.title}</h4>
-            <div className="d-flex justify-content-between">
-              <p>
-                <strong>Add it by :</strong>
-                {/* {data.user.username} user */}
-              </p>
-              <p className="">
-                <strong>Date of creation :</strong> {timeAgo}
-              </p>
-            </div>
+            <h4 className="fw-bold">{data.title}</h4>
+            <p className="fw-normal text-muted">
+             {timeAgo}
+            </p>
+           
+          
             <hr></hr>
+            <div className="d-flex my-3">
+              
+              {languages.map((language) => (
+                   <div className="badge rounded-pill bg-dark me-2 p-2">
+                      {language.content}
+                    </div>
+                  ))}
+              </div>
             <div className="">
               <p>{data.content}</p>
+          
+            
             </div>
-            <div className="float-start mt-5">
+            <hr className="my-2"/>
+            <div className="float-start">
               <p>
-                <strong>Comment as :</strong> user1
+                <strong>Answers :</strong> user1
               </p>
             </div>
           </div>

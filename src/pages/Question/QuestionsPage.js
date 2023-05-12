@@ -17,7 +17,9 @@ const QuestionsPage = () => {
   return (
     <div className="container">
       <h1 className="mt-5">List of questions</h1>
-      <Link to="/add" className="btn btn-primary">Add </Link>
+      <Link to="/add" className="btn btn-primary">
+        Add{" "}
+      </Link>
       {loading ? (
         <div className="d-flex justify-content-center mt-5">
           <div className="spinner-border" role="status">
@@ -34,22 +36,37 @@ const QuestionsPage = () => {
                 key={e.id}
               >
                 <div className="card-body">
-                  <h5 className="card-title">{e.title}</h5>
-                  <p
-                    className="card-text"
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      maxWidth: "100%",
-                    }}
-                  >
-                    {e.content}
-                  </p>
+                  <h5 className="fw-bold mt-2">{e.title}</h5>
+                  <div className="d-flex">
+                  {e.answers.length > 0 ? (
+                    <div className="text-success">
+                      <i className="fa-solid fa-circle-check pe-2"></i>
+                      <span className="fw-bold">Answered</span>
+                    </div>
+                  ) : (
+                    <div className="text-danger">
+                      <i className="fa-regular fa-circle-check pe-2"></i>
+                      <span className="fw-bold">No anwser</span>
+                    </div>
+                  )}
+                  <span className="me-2"></span>
                   <p className="text-muted">
-                    <strong>Date of creation : </strong>
-                    {dateFormatMonth(e.createdAt)}
+                    {dateFormatMonth(e.dateOfCreation)}
                   </p>
+                  </div>
+           
+                    <p
+                      className=""
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "100%",
+                      }}
+                    >
+                      {e.content}
+                    </p>
+                  
                 </div>
               </Link>
             ))}

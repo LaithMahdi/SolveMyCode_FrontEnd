@@ -1,5 +1,6 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
 import React, { Component } from "react";
 import QuestionsPage from "./pages/Question/QuestionsPage";
 import HomePage from "./pages/HomePage";
@@ -34,7 +35,7 @@ class App extends Component {
               >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className='nav-item'><Link to='/' className='nav-link'>Home</Link></li>
-              <li className='nav-item'> <Link to='/question' className='nav-link'>Questions</Link> </li>
+              <li className='nav-item'> <Link to='/question' className='nav-link'>Questions </Link> </li>
               <li className='nav-item'><Link to='/about' className='nav-link'>About</Link></li>
                 </ul>
                 <form className="d-flex">
@@ -45,7 +46,7 @@ class App extends Component {
                     aria-label="Search"
                   />
                   <button className="btn btn-outline-light" type="submit">
-                    Search
+                    Search 
                   </button>
                 </form>
               </div>

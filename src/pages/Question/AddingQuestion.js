@@ -34,6 +34,7 @@ const AddingQuestion = () => {
     } catch (error) {
       console.error(error);
       setError(true);
+      setDone(false);
     }
   };
 
@@ -45,12 +46,12 @@ const AddingQuestion = () => {
       <div className="col-6">
         {done && (
           <div className="alert alert-success" role="alert">
-            Post created successfully!
+            Question created successfully!
           </div>
         )}
         {error && (
           <div className="alert alert-danger" role="alert">
-            An error occurred while creating the post.
+            An error occurred while creating the question.
           </div>
         )}
 
