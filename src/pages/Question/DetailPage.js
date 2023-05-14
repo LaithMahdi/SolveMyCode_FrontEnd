@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL, getTimeAgo } from "../../config/utils";
-import axios from "axios";
+// import axios from "axios";
 
 export default function Detail() {
   // get id from url
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [languages, setLanguages] = useState([]);
   // fecthing data
   useEffect(() => {
     fetch(`${API_URL}/${id}`)
@@ -16,11 +15,11 @@ export default function Detail() {
       .catch((error) => console.error(error));
   }, [id]);
 
-  useEffect(() => {
-    axios.get(`${API_URL}/${id}/languages`).then((response) => {
-      setLanguages(response.data);
-    });
-  }, [id]);
+  // useEffect(() => {
+  //   axios.get(`${API_URL}/${id}/languages`).then((response) => {
+  //     setLanguages(response.data);
+  //   });
+  // }, [id]);
   // if no data found spinner willl still visible
   if (!data) {
     return (
@@ -59,17 +58,9 @@ export default function Detail() {
            
           
             <hr></hr>
-            <div className="d-flex my-3">
-              
-              {languages.map((language) => (
-                   <div className="badge rounded-pill bg-dark me-2 p-2">
-                      {language.content}
-                    </div>
-                  ))}
-              </div>
             <div className="">
               <p>{data.content}</p>
-          
+              <h1>{data.answers.content}</h1>
             
             </div>
             <hr className="my-2"/>

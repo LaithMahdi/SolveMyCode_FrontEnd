@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config/utils";
+
 const AddingQuestion = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [picture, setPicture] = useState("");
+
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // i create this object because hour -1
+
+    if (!title.trim() || !content.trim()) {
+      setError(true);
+      return;
+    }
+
     const now = new Date();
     now.setHours(now.getHours() + 1);
     try {
       const response = await axios.post(API_URL, {
         title: title,
         content: content,
-        picture: picture,
         dateOfCreation: now,
       });
       console.log(response.data);
 
       if (response.status === 201) {
+        const id = response.data.id;
+        console.log("id is : ",id);
         setDone(true);
         setError(false);
         setTitle("");
         setContent("");
-        setPicture("");
       } else {
         setError(true);
       }
@@ -37,6 +43,9 @@ const AddingQuestion = () => {
       setDone(false);
     }
   };
+
+ 
+
 
   return (
     <form
@@ -56,7 +65,7 @@ const AddingQuestion = () => {
         )}
 
         <div>
-          <label>Title:</label>
+          <label className="my-2">Title:</label>
           <input
             type="text"
             id="title"
@@ -67,7 +76,7 @@ const AddingQuestion = () => {
         </div>
 
         <div>
-          <label>Content:</label>
+          <label className="my-2">Content:</label>
           <textarea
             id="content"
             value={content}
@@ -76,17 +85,8 @@ const AddingQuestion = () => {
           />
         </div>
 
-        <div>
-          <label>Picture:</label>
-          <input
-            type="file"
-            id="picture"
-            onChange={(e) => setPicture(e.target.files[0])}
-            className="form-control"
-            accept=".jpg, .jpeg, .png"
-            size="2097152"
-          />
-        </div>
+      
+
         <div>
           <button type="submit" className="btn btn-primary my-3">
             Submit
@@ -96,4 +96,5 @@ const AddingQuestion = () => {
     </form>
   );
 };
+
 export default AddingQuestion;

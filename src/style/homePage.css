@@ -1,0 +1,13 @@
+#header{
+    width: 100%;
+    height: 100vh;
+    background: url(/public/assests/bg.png) center center no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.pic{
+    width: 50vw;
+    height: 45vh;
+    overflow: visible;
+}
