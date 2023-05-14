@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "../style/style.css";
 import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { Link } from "react-router-dom";
 export default function Blog() {
     useEffect(() => {
@@ -39,15 +38,15 @@ export default function Blog() {
     },
   ];
   return (
-    <div className="" id="header">
-      <div className="box">
+    <div className="blog">
+      <div className="container">
         <div className="p-5 text-center">
           <h5 className="fw-light text-muted">Recent Blog Posts</h5>
           <h2 className="fw-bolder text-uppercase">What's happening</h2>
         </div>
-        <div className="container d-flex">
+        <div className="row d-flex justify-content-center">
           {data.map((item) => (
-            <div className="col-md-4 col-6 mx-2" data-aos="fade-up" data-aos-delay="300" data-aos-duration={item.duration}>
+            <div className="col-md-4 col-12 m-2" data-aos="fade-up" data-aos-delay="300" data-aos-duration={item.duration}>
               <div className="card" >
                 <img src={item.picture} className="card-img-top" alt="..."  style={{height:"30vh"}}/>
                 <div className="card-body">

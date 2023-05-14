@@ -1,12 +1,40 @@
-#header{
+#header {
     width: 100%;
     height: 100vh;
     background: url(/public/assests/bg.png) center center no-repeat;
     background-size: cover;
 }
 
-.pic{
+#header .card {
+    margin: 25px;
+}
+.blog{
+    width: 100%;
+    background: url(/public/assests/bg.png) center center no-repeat;
+    background-size: cover;
+}
+.pic {
     width: 50vw;
     height: 45vh;
     overflow: visible;
+}
+
+.faqs {
+    background: url(/public/assests/bg_2.png) center center no-repeat;
+    background-size: cover;
+    
+}
+
+@media only screen and (max-width: 480px) {
+    #titleHeader {
+        margin-top: 2rem;
+    }
+
+    .pic {
+        width: 100%;
+    }
+
+    #header .card {
+        margin: 10px;
+    }
 }
