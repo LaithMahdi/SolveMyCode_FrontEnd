@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import '../style/homePage.css';
+import '../style/style.css';
 import { Link } from 'react-router-dom';
-import HeaderContent from '../components/HeaderContent';
 import Silder from '../components/Silder';
+import Blog from '../components/Blog';
 export default class HomePage extends Component {
   render() {
     return (
@@ -24,8 +24,9 @@ export default class HomePage extends Component {
                     </div>
                 </div>
             </div>
-        <HeaderContent />
+     
         <Silder/>
+        <Blog />
         </div>
       
     )
