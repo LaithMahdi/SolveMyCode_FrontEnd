@@ -35,7 +35,7 @@ function HomePage() {
               help you overcome your challenges today.
             </p>
             <div>
-              <Link className="btn btn-dark me-2">Ask question</Link>
+              <Link to="/add" className="btn btn-dark me-2">Ask question</Link>
               <Link className="btn btn-outline-dark">Contact</Link>
             </div>
           </div>

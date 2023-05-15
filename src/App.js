@@ -12,6 +12,7 @@ import UpdatingQuestion from "./pages/Question/UpdatingQuestion";
 const AboutPage = () => <div>About</div>;
 
 const App = () => {
+  
   return (
     <BrowserRouter>
       <div className="App">

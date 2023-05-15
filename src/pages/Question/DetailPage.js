@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL, getTimeAgo } from "../../config/utils";
+import {} from "react-router-dom";
+
 // import axios from "axios";
 
 export default function Detail() {
   // get id from url
   const { id } = useParams();
+
   const [data, setData] = useState(null);
   // fecthing data
   useEffect(() => {
@@ -18,7 +21,7 @@ export default function Detail() {
   if (!data) {
     return (
       <div class="text-center my-5">
-        <div class="spinner-border" role="status">
+        <div class="spinner-border my-5" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -28,55 +31,73 @@ export default function Detail() {
   // format date
   const date = new Date(data.dateOfCreation);
   const timeAgo = getTimeAgo(date);
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this question?")) {
+      fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Redirect to the question list page
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+  };
 
   return (
     <div className="container mt-5">
       <div className="row">
-      <div className="col mt-5"><nav style={{ "--bs-breadcrumb-divider": ">" }} aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/question">Question</Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Detail
-          </li>
-        </ol>
-      </nav></div>
+        <div className="col mt-5">
+          <nav
+            style={{ "--bs-breadcrumb-divider": ">" }}
+            aria-label="breadcrumb"
+          >
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to="/question">Question</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                Detail
+              </li>
+            </ol>
+          </nav>
+        </div>
 
+        <div className="row">
+          <div className="col">
+            <div className="box">
+              <h4 className="fw-bold">{data.title}</h4>
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="fw-normal text-muted">{timeAgo}</p>
 
-      <div className="row">
-      <div className="col">
-          <div className="box">
-            <h4 className="fw-bold">{data.title}</h4>
-            <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <Link to={"/edit/" + id} className="btn btn-dark">
+                    <i className="fa-solid fa-pen"></i>
+                  </Link>
+                  <button
+                    className="btn btn-danger ms-2"
+                    onClick={handleDelete}
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
 
-            <p className="fw-normal text-muted">
-             {timeAgo}
-            </p>
-
-            <Link to={"/edit/"+id} className="btn btn-dark">
-            <i className="fa-solid fa-pen"></i>
-            </Link>
-            </div>
-           
-          
-            <hr></hr>
-            <div className="">
-              <p>{data.content}</p>
-              <h1>{data.answers.content}</h1>
-            
-            </div>
-            <hr className="my-2"/>
-            <div className="float-start">
-              <p>
-                <strong>Answers :</strong> user1
-              </p>
+              <hr></hr>
+              <div className="">
+                <p>{data.content}</p>
+                <h1>{data.answers.content}</h1>
+              </div>
+              <hr className="my-2" />
+              <div className="float-start">
+                <p>
+                  <strong>Answers :</strong> user1
+                </p>
+              </div>
             </div>
           </div>
         </div>
-    
-      </div>
-
       </div>
     </div>
   );

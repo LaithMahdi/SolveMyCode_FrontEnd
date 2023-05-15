@@ -12,11 +12,7 @@ const AddingQuestion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title.trim() || !content.trim()) {
-      setError(true);
-      return;
-    }
-
+ 
     const now = new Date();
     now.setHours(now.getHours() + 1);
     try {
@@ -27,7 +23,7 @@ const AddingQuestion = () => {
       });
       console.log(response.data);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         const id = response.data.id;
         console.log("id is : ", id);
         setDone(true);
