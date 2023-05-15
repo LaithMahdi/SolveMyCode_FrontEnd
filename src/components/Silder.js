@@ -20,24 +20,10 @@ export default function Slider() {
     AOS.refresh();
   });
   return (
-    <div className="text-center mb-5">
-      {/* <h3 className="fw-bold mb-5">
+    <div className="mt-5">
+      <h3 className="fw-bold mb-5 text-center">
         Trusted by hundreds of progressive brands
       </h3>
-      {items.map((item, index) => (
-        <div className="d-inline mx-5">
-          <img
-            src={item}
-            key={index}
-            alt={`slider ${index + 1}`}
-            className=""
-            data-aos="fade-down"
-            data-aos-easing="linear"
-            data-aos-delay="400"
-            data-aos-duration={`${index + 1}000`}
-          />
-        </div>
-      ))} */}
       <div className="container">
         <div className="row">
         {items.map((item, index) => (

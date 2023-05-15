@@ -15,11 +15,12 @@ const QuestionsPage = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="mt-5">List of questions</h1>
-      <Link to="/add" className="btn btn-outline-primary">
+    <div className="container mt-5">
+     <div className="row">
+     <h1 className="mt-5">List of questions</h1>
+     <div> <Link to="/add" className="btn btn-outline-primary">
         <i className="fa-solid fa-plus"></i> Adding question 
-      </Link>
+      </Link></div>
       {loading ? (
         <div className="d-flex justify-content-center mt-5">
           <div className="spinner-border" role="status">
@@ -27,7 +28,7 @@ const QuestionsPage = () => {
           </div>
         </div>
       ) : (
-        <div className="row mt-4">
+      
           <div className="col-10">
             {questions.map((e) => (
               <Link
@@ -80,8 +81,9 @@ const QuestionsPage = () => {
               </Link>
             ))}
           </div>
-        </div>
+  
       )}
+     </div>
     </div>
   );
 };

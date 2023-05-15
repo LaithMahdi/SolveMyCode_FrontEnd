@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import Detail from "./pages/Question/DetailPage";
 import AddingQuestion from "./pages/Question/AddingQuestion";
 import "./App.css";
+import UpdatingQuestion from "./pages/Question/UpdatingQuestion";
 
 const AboutPage = () => <div>About</div>;
 
@@ -71,6 +72,7 @@ const App = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/add" element={<AddingQuestion />} />
+          <Route path="/edit/:id" element={<UpdatingQuestion/>} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -27,9 +27,9 @@ const AddingQuestion = () => {
       });
       console.log(response.data);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         const id = response.data.id;
-        console.log("id is : ",id);
+        console.log("id is : ", id);
         setDone(true);
         setError(false);
         setTitle("");
@@ -44,56 +44,57 @@ const AddingQuestion = () => {
     }
   };
 
- 
-
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="container mt-4 d-flex justify-content-center"
-    >
-      <div className="col-6">
-        {done && (
-          <div className="alert alert-success" role="alert">
-            Question created successfully!
+    <div className="container mt-5">
+      <div className="row">
+        <form
+          onSubmit={handleSubmit}
+          className="container mt-4 d-flex justify-content-center"
+        >
+          <div className="col-6">
+            {done && (
+              <div className="alert alert-success" role="alert">
+                Question created successfully!
+              </div>
+            )}
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                An error occurred while creating the question.
+              </div>
+            )}
+
+            <div>
+              <label className="my-2">Title:</label>
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="form-control"
+                required={true}
+              />
+            </div>
+
+            <div>
+              <label className="my-2">Content:</label>
+              <textarea
+                id="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="form-control"
+                required={true}
+              />
+            </div>
+
+            <div>
+              <button type="submit" className="btn btn-primary my-3">
+                Submit
+              </button>
+            </div>
           </div>
-        )}
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            An error occurred while creating the question.
-          </div>
-        )}
-
-        <div>
-          <label className="my-2">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="form-control"
-          />
-        </div>
-
-        <div>
-          <label className="my-2">Content:</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="form-control"
-          />
-        </div>
-
-      
-
-        <div>
-          <button type="submit" className="btn btn-primary my-3">
-            Submit
-          </button>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 

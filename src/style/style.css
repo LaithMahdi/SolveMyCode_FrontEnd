@@ -8,11 +8,7 @@
 #header .card {
     margin: 25px;
 }
-.blog{
-    width: 100%;
-    background: url(/public/assests/bg.png) center center no-repeat;
-    background-size: cover;
-}
+
 .pic {
     width: 50vw;
     height: 45vh;

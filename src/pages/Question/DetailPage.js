@@ -15,12 +15,6 @@ export default function Detail() {
       .catch((error) => console.error(error));
   }, [id]);
 
-  // useEffect(() => {
-  //   axios.get(`${API_URL}/${id}/languages`).then((response) => {
-  //     setLanguages(response.data);
-  //   });
-  // }, [id]);
-  // if no data found spinner willl still visible
   if (!data) {
     return (
       <div class="text-center my-5">
@@ -36,8 +30,9 @@ export default function Detail() {
   const timeAgo = getTimeAgo(date);
 
   return (
-    <div className="container mt-3 container_shape">
-      <nav style={{ "--bs-breadcrumb-divider": ">" }} aria-label="breadcrumb">
+    <div className="container mt-5">
+      <div className="row">
+      <div className="col mt-5"><nav style={{ "--bs-breadcrumb-divider": ">" }} aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <Link to="/question">Question</Link>
@@ -46,15 +41,23 @@ export default function Detail() {
             Detail
           </li>
         </ol>
-      </nav>
+      </nav></div>
 
-      <div className="row mt-5 shape">
-        <div className="col">
+
+      <div className="row">
+      <div className="col">
           <div className="box">
             <h4 className="fw-bold">{data.title}</h4>
+            <div className="d-flex justify-content-between align-items-center">
+
             <p className="fw-normal text-muted">
              {timeAgo}
             </p>
+
+            <Link to={"/edit/"+id} className="btn btn-dark">
+            <i className="fa-solid fa-pen"></i>
+            </Link>
+            </div>
            
           
             <hr></hr>
@@ -71,6 +74,9 @@ export default function Detail() {
             </div>
           </div>
         </div>
+    
+      </div>
+
       </div>
     </div>
   );
