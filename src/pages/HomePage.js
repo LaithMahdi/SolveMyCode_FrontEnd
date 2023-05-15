@@ -5,6 +5,8 @@ import Faqs from "../components/Faqs";
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "../style/style.css";
+import Contact from "../components/Contact";
+import FooterCop from "../components/FooterCop";
 
 function HomePage() {
   useEffect(() => {
@@ -55,6 +57,8 @@ function HomePage() {
       <Silder />
       <Blog />
       <Faqs />
+      <Contact />
+      <FooterCop />
     </div>
   );
 }

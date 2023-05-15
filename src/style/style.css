@@ -20,7 +20,16 @@
     background-size: cover;
     
 }
-
+#contact{
+    background: url(/public/assests/bg_4.png) center center no-repeat;
+    background-size: cover; 
+}
+#footer ul{
+    list-style: none;
+}
+#footer ul li{
+    padding: 5px;
+}
 @media only screen and (max-width: 480px) {
     #titleHeader {
         margin-top: 2rem;
