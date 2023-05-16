@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAllQuestions } from "../../Api/Question";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API_URL, dateFormatMonth } from "../../config/utils";
+import { API_URL, API_URL_ANSWSER, dateFormatMonth } from "../../config/utils";
 import "../../style/style.css";
 
 const QuestionsPage = () => {
@@ -12,6 +12,22 @@ const QuestionsPage = () => {
   const [content, setContent] = useState("");
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await axios.get(API_URL_ANSWSER);
+        setAnswers(response.data["hydra:member"]);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        // Handle any errors that occur during the fetch
+      }
+    };
+
+    fetchAnswers();
+  }, []);
 
   const handleDelete = async (questionId) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
@@ -69,16 +85,36 @@ const QuestionsPage = () => {
   return (
     <div className="container mt-5">
       <div className="row">
-        <h1 className="mt-5">List of questions</h1>
-        <div>
-          <Link
-            to=""
-            className="btn btn-outline-primary mb-3"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
-            <i className="fa-solid fa-plus"></i> Adding question
-          </Link>
+        <div className="d-flex align-items-end justify-content-between mb-3">
+          <div className="">
+            <h1 className="mt-5 fw-bold">List of questions</h1>
+            <div>
+              <Link
+                to=""
+                className="btn btn-outline-dark mt-2"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                <i className="fa-solid fa-plus"></i> Adding question
+              </Link>
+            </div>
+          </div>
+
+          <div className="d-flex">
+            <div className="border border-2 rounded-3 me-2">
+              <div className="box text-center p-3">
+                <h5 className="text-primary">Question</h5>
+                <h2 className="fw-bold">{questions.length}+</h2>
+              </div>
+            </div>
+
+            <div className="border border-2 rounded-3">
+              <div className="box text-center p-3">
+                <h5 className="text-danger">Answers</h5>
+                <h2 className="fw-bold">{answers.length}+</h2>
+              </div>
+            </div>
+          </div>
         </div>
         {loading ? (
           <div className="d-flex justify-content-center mt-5">
@@ -91,10 +127,7 @@ const QuestionsPage = () => {
             {questions.map((question) => (
               <div className="col-md-6 col-sm-6 col-12" key={question.id}>
                 <div className="p-3 m-2 border border-2 rounded-3 shadow-sm">
-                  <Link
-                    to={`/detail/${question.id}`}
-                    className="text-decoration-none text-dark"
-                  >
+                  <div>
                     <div className="d-flex justify-content-between align-items-center">
                       <h5
                         className="fw-bold mt-2"
@@ -122,42 +155,30 @@ const QuestionsPage = () => {
                           aria-labelledby="dropdownMenuButton1"
                         >
                           <li>
-                            <span className="dropdown-item">
-                              
+                            <button className="dropdown-item">
                               <Link
-                              Link to={"/edit/" + question.id}
+                                Link
+                                to={"/edit/" + question.id}
                                 className="text-dark text-decoration-none"
                               >
                                 edit
                               </Link>
-                            </span>
+                            </button>
                           </li>
                           <li>
-                            <span className="dropdown-item">
-                              {" "}
-                              <span
-                                className=""
+                            <button className="dropdown-item">
+                              <Link
+                                className="text-dark text-decoration-none"
                                 onClick={() => handleDelete(question.id)}
                               >
                                 delete
-                              </span>
-                            </span>
+                              </Link>
+                            </button>
                           </li>
                         </ul>
                       </div>
                     </div>
-                    <p
-                      className=""
-                      style={{
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        maxWidth: "100%",
-                      }}
-                    >
-                      {question.content}
-                    </p>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between mt-2">
                       {question.answers.length > 0 ? (
                         <div className="text-success">
                           <i className="fa-solid fa-circle-check pe-2"></i>
@@ -174,7 +195,26 @@ const QuestionsPage = () => {
                         {dateFormatMonth(question.dateOfCreation)}
                       </p>
                     </div>
-                  </Link>
+                    <p
+                      className=""
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "100%",
+                      }}
+                    >
+                      {question.content}
+                    </p>
+
+                    <Link
+                      to={`/detail/${question.id}`}
+                      className="text-decoration-none text-dark d-flex align-items-center fw-bold"
+                    >
+                      Read more
+                      <i className="fa-solid fa-arrow-right-long ms-2"></i>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -250,7 +290,7 @@ const QuestionsPage = () => {
                   >
                     Close
                   </button>
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-dark">
                     Add
                   </button>
                 </div>

@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { API_URL, API_URL_ANSWSER, formatDate, getTimeAgo } from "../../config/utils";
+import {
+  API_URL,
+  API_URL_ANSWSER,
+  formatDate,
+  getTimeAgo,
+} from "../../config/utils";
 import {} from "react-router-dom";
 import axios from "axios";
 import CodeBlock from "../../components/CodeBlock";
@@ -15,10 +20,8 @@ export default function Detail() {
   const [content, setContent] = useState("");
   function FormattedDate({ date }) {
     const formattedDate = formatDate(date);
-  
-    return (
-      <p>{formattedDate}</p>
-    );
+
+    return <p>{formattedDate}</p>;
   }
   // fecthing data
   useEffect(() => {
@@ -78,7 +81,6 @@ export default function Detail() {
   const date = new Date(data.dateOfCreation);
   const timeAgo = getTimeAgo(date);
 
-
   return (
     <div className="container mt-5">
       <div className="row">
@@ -89,7 +91,12 @@ export default function Detail() {
           >
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <Link to="/question">Question</Link>
+                <Link
+                  to="/question"
+                  className="text-decoration-none text-dark fw-bold"
+                >
+                  Question
+                </Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
                 Detail
@@ -101,15 +108,20 @@ export default function Detail() {
         <div className="row">
           <div className="col">
             <div className="box">
-              <h4 className="fw-bold">{data.title}</h4>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="fw-normal text-muted">{timeAgo}</p>
+              <div className="d-flex align-items-start justify-content-between">
+                <div className="text-start">
+                  <h4 className="fw-bold">{data.title}</h4>
+                  <p className="fw-normal text-muted">{timeAgo}</p>
+                </div>
 
                 <div>
-                  {/* <Link to={"/edit/" + id} className="btn btn-dark">
-                    <i className="fa-solid fa-pen"></i>
-                  </Link> */}
-               
+                  <button
+                    className="btn btn-outline-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    Answer to this question
+                  </button>
                 </div>
               </div>
 
@@ -119,31 +131,26 @@ export default function Detail() {
                 <CodeBlock code={data.content} />
               </div>
               <hr className="my-2" />
-              <button
-                className="btn btn-outline-dark mt-3"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              >
-                Answer to this question
-              </button>
 
               <div className="float-start col-12">
-              <div className="m-2">
-              <h5 className="fw-bold my-3">Answers : </h5>
-                {answers.length > 0 ? (
-                  answers.map((answer) => (
-                    <div key={answer["@id"]}>
-                      <div className="d-flex text-secondary fst-normal">
-                      <p className="me-1">Added an answer on</p>
-                      <FormattedDate date={answer.dateOfCreation} />
+                <div className="m-2">
+                  <h5 className="fw-bold my-3">Answers : </h5>
+                  {answers.length > 0 ? (
+                    answers.map((answer) => (
+                      <div key={answer["@id"]}>
+                        <div className="d-flex text-secondary fst-normal">
+                          <p className="me-1">Added an answer on</p>
+                          <FormattedDate date={answer.dateOfCreation} />
+                        </div>
+                        <CodeBlock code={answer.content} />
                       </div>
-                      <CodeBlock code={answer.content} />
+                    ))
+                  ) : (
+                    <div class="alert alert-dark" role="alert">
+                      No answers available.
                     </div>
-                  ))
-                ) : (
-                  <p>No answers available.</p>
-                )}
-              </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -186,7 +193,7 @@ export default function Detail() {
                   />
                 </div>
                 <div className="text-end mx-3">
-                  <button type="submit" className="btn btn-primary mb-3">
+                  <button type="submit" className="btn btn-dark mb-3">
                     Add this answer
                   </button>
                 </div>
