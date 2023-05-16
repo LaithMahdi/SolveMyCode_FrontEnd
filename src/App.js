@@ -5,7 +5,7 @@ import React from "react";
 import QuestionsPage from "./pages/Question/QuestionsPage";
 import HomePage from "./pages/HomePage";
 import Detail from "./pages/Question/DetailPage";
-import AddingQuestion from "./pages/Question/AddingQuestion";
+
 import "./App.css";
 import UpdatingQuestion from "./pages/Question/UpdatingQuestion";
 
@@ -72,7 +72,6 @@ const App = () => {
           <Route path="/question" element={<QuestionsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/add" element={<AddingQuestion />} />
           <Route path="/edit/:id" element={<UpdatingQuestion/>} />
         </Routes>
       </div>

@@ -26,7 +26,7 @@ function HomePage() {
           <div className="box ms-5">
             <h1 className="fw-bolder " data-aos="fade-right"  data-aos-delay="300"
               data-aos-duration="3000"
-              data-aos-easing="ease-in-sine" id="titleHeader">Your are developer</h1>
+              data-aos-easing="ease-in-sine" id="titleHeader">Hello developer ...</h1>
             <p>
               We're a problem-solving website with a team of experts who offer
               solutions for a variety of issues. Submit your problem and receive

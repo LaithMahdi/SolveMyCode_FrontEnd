@@ -26,9 +26,18 @@
 }
 #footer ul{
     list-style: none;
+    padding: 0;
 }
 #footer ul li{
     padding: 5px;
+}
+.dropdown-toggle{
+    background-color: transparent;
+    border: none;
+    color: none;
+}
+button#dropdownMenuButton1.dropdown-toggle::after{
+    display: none;
 }
 @media only screen and (max-width: 480px) {
     #titleHeader {

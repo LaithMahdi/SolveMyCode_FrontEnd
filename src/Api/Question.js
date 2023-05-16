@@ -10,6 +10,8 @@ export async function getAllQuestions() {
     }
 } 
 
+
+ 
 export async function getQuestionWithId(id) {
     try {
       const response = await axios.get(`${API_URL}/${id}`);

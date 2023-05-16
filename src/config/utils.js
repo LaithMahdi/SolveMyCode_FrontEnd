@@ -1,6 +1,6 @@
 // to make url public for api
 export const API_URL = 'https://127.0.0.1:8000/api/questions';
-
+export const API_URL_ANSWSER = 'https://127.0.0.1:8000/api/answers';
 // for format date 
 export function getTimeAgo(date) {
   const now = new Date();
@@ -30,4 +30,20 @@ export function dateFormatMonth(dateFormat){
     minute: 'numeric',
   });
   return formattedDate;
-  }
+}
+
+
+export function formatDate(date) {
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  };
+
+  return new Date(date).toLocaleString('en-US', options);
+}
+
+

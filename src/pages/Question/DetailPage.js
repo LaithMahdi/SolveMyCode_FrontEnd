@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { API_URL, getTimeAgo } from "../../config/utils";
+import { API_URL, API_URL_ANSWSER, formatDate, getTimeAgo } from "../../config/utils";
 import {} from "react-router-dom";
+import axios from "axios";
+import CodeBlock from "../../components/CodeBlock";
 
 // import axios from "axios";
 
 export default function Detail() {
   // get id from url
   const { id } = useParams();
-
   const [data, setData] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [content, setContent] = useState("");
+  function FormattedDate({ date }) {
+    const formattedDate = formatDate(date);
+  
+    return (
+      <p>{formattedDate}</p>
+    );
+  }
   // fecthing data
   useEffect(() => {
     fetch(`${API_URL}/${id}`)
@@ -17,6 +27,42 @@ export default function Detail() {
       .then((data) => setData(data))
       .catch((error) => console.error(error));
   }, [id]);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await fetch(`${API_URL}/${id}/answers`);
+        const responseData = await response.json();
+        setAnswers(responseData["hydra:member"]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchAnswers();
+  }, [id]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+    try {
+      const response = await axios.post(API_URL_ANSWSER, {
+        content: content,
+        dateOfCreation: now,
+        question: `/api/questions/${id}`,
+      });
+      console.log(response.data);
+
+      if (response.status === 201) {
+        const newAnswer = response.data;
+        setAnswers([...answers, newAnswer]);
+        setContent("");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!data) {
     return (
@@ -31,19 +77,7 @@ export default function Detail() {
   // format date
   const date = new Date(data.dateOfCreation);
   const timeAgo = getTimeAgo(date);
-  const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this question?")) {
-      fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            // Redirect to the question list page
-          }
-        })
-        .catch((error) => console.error(error));
-    }
-  };
+
 
   return (
     <div className="container mt-5">
@@ -72,33 +106,95 @@ export default function Detail() {
                 <p className="fw-normal text-muted">{timeAgo}</p>
 
                 <div>
-                  <Link to={"/edit/" + id} className="btn btn-dark">
+                  {/* <Link to={"/edit/" + id} className="btn btn-dark">
                     <i className="fa-solid fa-pen"></i>
-                  </Link>
-                  <button
-                    className="btn btn-danger ms-2"
-                    onClick={handleDelete}
-                  >
-                    <i className="fa-solid fa-trash"></i>
-                  </button>
+                  </Link> */}
+               
                 </div>
               </div>
 
               <hr></hr>
+
               <div className="">
-                <p>{data.content}</p>
-                <h1>{data.answers.content}</h1>
+                <CodeBlock code={data.content} />
               </div>
               <hr className="my-2" />
-              <div className="float-start">
-                <p>
-                  <strong>Answers :</strong> user1
-                </p>
+              <button
+                className="btn btn-outline-dark mt-3"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                Answer to this question
+              </button>
+
+              <div className="float-start col-12">
+              <div className="m-2">
+              <h5 className="fw-bold my-3">Answers : </h5>
+                {answers.length > 0 ? (
+                  answers.map((answer) => (
+                    <div key={answer["@id"]}>
+                      <div className="d-flex text-secondary fst-normal">
+                      <p className="me-1">Added an answer on</p>
+                      <FormattedDate date={answer.dateOfCreation} />
+                      </div>
+                      <CodeBlock code={answer.content} />
+                    </div>
+                  ))
+                ) : (
+                  <p>No answers available.</p>
+                )}
+              </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <section>
+        <div
+          className="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title fw-bold" id="staticBackdropLabel">
+                  Answer to this question
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="m-3">
+                  <label className="mb-3">Add answer :</label>
+                  <textarea
+                    id="content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    className="form-control"
+                    required={true}
+                    style={{ whiteSpace: "pre-wrap" }}
+                    rows={10}
+                  />
+                </div>
+                <div className="text-end mx-3">
+                  <button type="submit" className="btn btn-primary mb-3">
+                    Add this answer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
