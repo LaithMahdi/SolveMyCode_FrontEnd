@@ -38,7 +38,6 @@ const QuestionsPage = () => {
         );
       } catch (error) {
         console.error(error);
-        // Handle any errors that occur during the deletion
       }
     }
   };

@@ -44,13 +44,15 @@ export default function FooterCop() {
                     <h5 className='fw-bold mb-4'>Contact Info</h5>
                         <ul className='mt-2'>
                             <li><Link to="/" className='text-decoration-none text-dark'>
-                            <i classname="fa-solid fa-envelope pe-2"></i>
+                            <i className="fa-solid fa-envelope pe-2"></i>
+                            
                                 Mahdilaith380@gmail.com</Link></li>
                             <li><Link to="/" className='text-decoration-none text-dark'>
                             <i className="fa-solid fa-phone pe-2"></i>
                                 +216 98 765 432</Link></li>
                             <li><Link to="/" className='text-decoration-none text-dark'>
-                            <i classname="fa-solid fa-location-dot pe-2"></i>
+                           
+                            <i className="fa-solid fa-location-dot pe-2"></i>
                                 Korba , Nabeul, Tunisie</Link></li>
                            
                         </ul>
