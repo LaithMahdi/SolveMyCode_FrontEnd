@@ -12,7 +12,6 @@ const { id } = useParams();
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    // Fetch the existing question details and populate the form fields with the current values
     const fetchQuestionDetails = async () => {
       try {
         const response = await axios.get(`${API_URL}/${id}`);
@@ -95,6 +94,7 @@ const { id } = useParams();
             onChange={(e) => setContent(e.target.value)}
             className="form-control"
             rows={10}
+            cols={15}
           />
         </div>
 

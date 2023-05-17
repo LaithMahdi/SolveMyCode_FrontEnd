@@ -5,11 +5,9 @@ import React from "react";
 import QuestionsPage from "./pages/Question/QuestionsPage";
 import HomePage from "./pages/HomePage";
 import Detail from "./pages/Question/DetailPage";
-
 import "./App.css";
 import UpdatingQuestion from "./pages/Question/UpdatingQuestion";
-
-const AboutPage = () => <div>About</div>;
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
   

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function FooterCop() {
   return (
-    <div className='mt-5' id='footer'>
+    <div className='mt-5 p-5' id='footer'>
         <div className='container'>
             <div className='row'>
                 <div className='col-md-4 col-lg-3 col-sm-6 col-12'>
@@ -19,10 +19,10 @@ export default function FooterCop() {
                     <div className='box'>
                         <h5 className='fw-bold mb-4'>Important Link</h5>
                         <ul className='mt-2'>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Home</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>About US</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>FAQS</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Contact</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Home</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>About US</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>FAQS</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Contact</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -31,10 +31,10 @@ export default function FooterCop() {
                     <div className='box'>
                     <h5 className='fw-bold mb-4'>Social Link</h5>
                         <ul className='mt-2'>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Facebook</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Linkedin</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Twitter</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>Instagram</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Facebook</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Linkedin</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Twitter</Link></li>
+                            <li><Link to="/" className='text-decoration-none text-muted'>Instagram</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -43,14 +43,14 @@ export default function FooterCop() {
                     <div className='box'>
                     <h5 className='fw-bold mb-4'>Contact Info</h5>
                         <ul className='mt-2'>
-                            <li><Link to="/" className='text-decoration-none text-dark'>
+                            <li><Link to="/" className='text-decoration-none text-muted'>
                             <i className="fa-solid fa-envelope pe-2"></i>
                             
                                 Mahdilaith380@gmail.com</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>
+                            <li><Link to="/" className='text-decoration-none text-muted'>
                             <i className="fa-solid fa-phone pe-2"></i>
                                 +216 98 765 432</Link></li>
-                            <li><Link to="/" className='text-decoration-none text-dark'>
+                            <li><Link to="/" className='text-decoration-none text-muted'>
                            
                             <i className="fa-solid fa-location-dot pe-2"></i>
                                 Korba , Nabeul, Tunisie</Link></li>

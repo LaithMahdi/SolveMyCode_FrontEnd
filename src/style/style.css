@@ -11,13 +11,11 @@
 
 #icon{
     font-size: 10rem;
-    opacity: 0.2;
-    
+    color: lightgray;
 }
 #icon:hover{
     color: black;
     transition: ease-in-out;
-    opacity: 1;
 }
 .pic {
     width: 50vw;
@@ -34,9 +32,13 @@
     padding-bottom: 5rem;
 }
 #contact{
-    background: linear-gradient(to right,rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.5)),url(/public/assests/bg_4.png) center center no-repeat;
+    background: linear-gradient(to right,rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)),url(/public/assests/bg_4.png) center center no-repeat;
     background-size: cover; 
     padding-bottom: 2.5rem;
+}
+#footer {
+    background: url(/public/assests/bg_2.png) center center no-repeat;
+    background-size: cover;
 }
 #footer ul{
     list-style: none;
@@ -53,6 +55,21 @@
 button#dropdownMenuButton1.dropdown-toggle::after{
     display: none;
 }
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+  }
+  
 @media only screen and (max-width: 480px) {
     #titleHeader {
         margin-top: 2rem;

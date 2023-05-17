@@ -7,12 +7,20 @@ import "../../style/style.css";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
+  const [totalPages, setTotalPages] = useState(0); // New addition
+
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
   const [answers, setAnswers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
 
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -28,6 +36,9 @@ const QuestionsPage = () => {
 
     fetchAnswers();
   }, []);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleDelete = async (questionId) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
@@ -74,12 +85,22 @@ const QuestionsPage = () => {
     }
   };
 
-  useEffect(() => {
-    getAllQuestions().then((response) => {
+  // useEffect(() => {
+  //   getAllQuestions().then((response) => {
+  //     setQuestions(response.data["hydra:member"]);
+  //     setLoading(false);
+  //   });
+  // }, []);
+  const fetchData = async (page) => {
+    try {
+      const response = await axios.get(`${API_URL}/?page=${page}`);
       setQuestions(response.data["hydra:member"]);
-      setLoading(false);
-    });
-  }, []);
+      setTotalPages(response.data["hydra:view"]["hydra:last"].split("=")[1]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   return (
     <div className="container mt-5">
@@ -220,6 +241,40 @@ const QuestionsPage = () => {
           </div>
         )}
       </div>
+       {/* Render the pagination */}
+      <div className="my-2 d-flex justify-content-center" id="pagination">
+      <nav aria-label="Page navigation example">
+  <ul className="pagination">
+    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+      <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
+        <span aria-hidden="true">&laquo;</span>
+      </button>
+    </li>
+    
+    {/* Render page numbers */}
+    {/* You can replace totalPages with the actual total number of pages */}
+    {Array.from({ length: totalPages }).map((_, index) => (
+      <li
+        key={index + 1}
+        className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+      >
+        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
+          {index + 1}
+        </button>
+      </li>
+    ))}
+    
+    <li className={`page-item ${currentPage-1 === totalPages-1 ? 'disabled' : ''}`}>
+      <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+        <span aria-hidden="true">&raquo;</span>
+      </button>
+    </li>
+  </ul>
+</nav>
+      </div>
+
+
+
       <section>
         <div
           className="modal fade"

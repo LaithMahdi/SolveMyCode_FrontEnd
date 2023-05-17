@@ -36,7 +36,7 @@ function HomePage() {
             </p>
             <div>
               <Link to="/add" className="btn btn-light me-3">Ask question</Link>
-              <Link className="btn btn-outline-light">About</Link>
+              <Link to="/about" className="btn btn-outline-light">About</Link>
             </div>
           </div>
         </div>
@@ -59,6 +59,9 @@ function HomePage() {
       <Faqs />
       <Contact/>
       <FooterCop />
+      <div className='bg-dark col-12'>
+          <p className="p-3 text-light text-center">Copyright © 2023 all rights reserved <strong>Mahdi laith</strong></p>
+      </div>
     </div>
   );
 }
