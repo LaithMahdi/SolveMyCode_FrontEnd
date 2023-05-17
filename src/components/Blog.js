@@ -36,6 +36,14 @@ export default function Blog() {
         "https://res.infoq.com/news/2022/02/TypeScript-beta-release/en/headerimage/TypeScript-46-beta-improves-type-inference-and-error-checking-header-1645020026805.jpg",
         duration:"3000",
     },
+    {
+      title: "Tauri (a cross-platform app toolkit) goes 1.0",
+      content:
+        "Tauri is an app framework built with Rust. You build UIs for it using virtually any frontend JavaScript framework. It has three major tenets: security, privacy, and environment. Speaking to the latter",
+      picture:
+        "https://tauri.app/img/social.png",
+        duration:"4000",
+    },
   ];
   return (
     <div className="blog">

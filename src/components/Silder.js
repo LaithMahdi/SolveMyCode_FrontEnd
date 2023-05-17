@@ -4,14 +4,16 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 export default function Slider() {
   const items = [
-    "assests/slider/slider1.png",
-    "assests/slider/slider2.png",
-    "assests/slider/slider3.png",
-    "assests/slider/slider4.png",
-    "assests/slider/slider5.png",
-    "assests/slider/slider6.png",
-    "assests/slider/slider7.png",
+    "fa-brands fa-java",
+    "fa-brands fa-square-js",
+    "fa-brands fa-node-js",
+    "fa-brands fa-html5",
+    "fa-brands fa-docker",
+    "fa-brands fa-php",
+    "fa-brands fa-python",
+    "fa-brands fa-angular",
   ];
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -26,9 +28,9 @@ export default function Slider() {
       </h3>
       <div className="container">
         <div className="row">
-        {items.map((item, index) => (
-          <div className="col-6 col-md-3 d-flex align-items-center justify-content-center p-2">
-            <img
+          {items.map((item, index) => (
+            <div className="col-6 col-md-3 d-flex align-items-center justify-content-center p-2">
+              {/* <img
             src={item}
             key={index}
             alt={`slider ${index + 1}`}
@@ -37,9 +39,14 @@ export default function Slider() {
             data-aos-easing="linear"
             data-aos-delay="400"
             data-aos-duration={`${index + 1}000`}
-          />
-          </div>
-        ))}
+          /> */}
+
+              <i className={item} id="icon"  data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-delay="400"
+            data-aos-duration={`${index + 1}000`}></i>
+            </div>
+          ))}
         </div>
       </div>
     </div>

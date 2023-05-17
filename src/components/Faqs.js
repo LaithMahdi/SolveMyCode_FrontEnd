@@ -50,9 +50,9 @@ export default function Faqs() {
 
           <div className="col-md-8 col-12">
             {data.map((item) => (
-              <div className="accordion my-3" id="accordionExample">
+              <div className="accordion my-3" id="accordionExample" >
                 <div className="accordion-item ">
-                  <h2 className="accordion-header">
+                  <h2 className="accordion-header text-light" >
                     <button
                       className="accordion-button"
                       type="button"
@@ -60,8 +60,9 @@ export default function Faqs() {
                       data-bs-target="#collapseOne"
                       aria-expanded="true"
                       aria-controls="collapseOne"
+                      style={{backgroundColor: "black"}}
                     >
-                      <p className="fw-bold"> {item.title}</p>
+                      <p className="fw-bold text-light"> {item.title}</p>
                     </button>
                   </h2>
                   <div

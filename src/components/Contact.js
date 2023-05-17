@@ -44,8 +44,8 @@ export default function Contact() {
     <div className="my-5" id="contact">
       <div className="container">
         <div className="row">
-          <div className="col-md-10">
-            <div className="pt-5">
+          <div className="col-md-8">
+            <div className="pt-5  text-dark">
               <h6>Contact Us</h6>
               <h3 className="fw-bolder text-uppercase">Get in touch with us</h3>
             </div>
@@ -62,8 +62,8 @@ export default function Contact() {
                 </div>
               )}
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label className="mt-2">Name</label>
+                <div className="form-group text-white">
+                  <label className="my-2">Name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -73,8 +73,8 @@ export default function Contact() {
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <label className="mt-2">Email address</label>
+                <div className="form-group text-white">
+                  <label className="my-2">Email address</label>
                   <input
                     type="email"
                     className="form-control"
@@ -84,8 +84,8 @@ export default function Contact() {
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <label className="mt-2">Message</label>
+                <div className="form-group text-white">
+                  <label className="my-2">Message</label>
                   <textarea
                     className="form-control"
                     id="message"
@@ -95,7 +95,7 @@ export default function Contact() {
                     required
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-primary my-2">
+                <button type="submit" className="btn btn-dark mt-3">
                   Submit
                 </button>
               </form>

@@ -19,15 +19,15 @@ function HomePage() {
   return (
     <div className="mt-5">
       <div
-        className="row d-flex justify-content-center align-items-center"
+        className="row d-flex justify-content-start align-items-center"
         id="header"
       >
-        <div className="col-md-8 col-lg-8 col-sm-8 col-12 ">
-          <div className="box ms-5">
+        <div className="col-md-8 col-lg-8 col-sm-8 col-12">
+          <div className="box ms-5 text-light">
             <h1 className="fw-bolder " data-aos="fade-right"  data-aos-delay="300"
               data-aos-duration="3000"
               data-aos-easing="ease-in-sine" id="titleHeader">Hello developer ...</h1>
-            <p>
+            <p className="mt-4">
               We're a problem-solving website with a team of experts who offer
               solutions for a variety of issues. Submit your problem and receive
               quick and confidential support. We value your privacy and are
@@ -35,15 +35,15 @@ function HomePage() {
               help you overcome your challenges today.
             </p>
             <div>
-              <Link to="/add" className="btn btn-dark me-2">Ask question</Link>
-              <Link className="btn btn-outline-dark">Contact</Link>
+              <Link to="/add" className="btn btn-light me-3">Ask question</Link>
+              <Link className="btn btn-outline-light">About</Link>
             </div>
           </div>
         </div>
         <div className="col-md-4 col-lg-4 col-sm-4 col-12">
           <div className="image">
             <img
-              src="assests/bg_1.png"
+            src="assests/bg_1.png"
               className="pic img-fluid"
               alt="pic"
               data-aos="fade-down"
@@ -57,7 +57,7 @@ function HomePage() {
       <Silder />
       <Blog />
       <Faqs />
-      <Contact />
+      <Contact/>
       <FooterCop />
     </div>
   );
