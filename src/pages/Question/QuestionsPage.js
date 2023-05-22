@@ -4,6 +4,8 @@ import axios from "axios";
 import { API_URL, API_URL_ANSWSER } from "../../config/utils";
 import "../../style/style.css";
 import AddQuestion from "../../components/AddQuestion";
+import FooterCop from "../../components/FooterCop";
+import Navbar from "../../components/Navbar";
 
 const QuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -58,6 +60,7 @@ const QuestionsPage = () => {
 
   return (
     <div style={{ backgroundColor: "#f6f6f6" }}>
+      <Navbar />
       <div className="container mt-5">
         {loading ? (
           <div className="d-flex justify-content-center" style={{marginTop:"50vh"}}>
@@ -236,6 +239,7 @@ const QuestionsPage = () => {
 
       
       </div>
+      <FooterCop />
     </div>
   );
 };

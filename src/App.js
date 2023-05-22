@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter,Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import React from "react";
@@ -8,69 +8,21 @@ import Detail from "./pages/Question/DetailPage";
 import "./App.css";
 import UpdatingQuestion from "./pages/Question/UpdatingQuestion";
 import AboutPage from "./pages/AboutPage";
+import Login from "./pages/Login";
+import Singup from "./pages/Singup";
 
 const App = () => {
-  
   return (
     <BrowserRouter>
       <div className="App">
-        <nav className="navbar navbar-expand-lg  navbar-dark  bg-dark  fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to="/">
-              <strong>SolveMyCode</strong>
-            </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link to="/" className="nav-link">
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/question" className="nav-link">
-                    Questions{" "}
-                  </Link>{" "}
-                </li>
-                <li className="nav-item">
-                  <Link to="/about" className="nav-link">
-                    About
-                  </Link>
-                </li>
-              </ul>
-              <form className="d-flex">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn btn-outline-light" type="submit">
-                  Search
-                </button>
-              </form>
-            </div>
-          </div>
-        </nav>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="/question" element={<QuestionsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/edit/:id" element={<UpdatingQuestion/>} />
+          <Route path="/edit/:id" element={<UpdatingQuestion />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign" element={<Singup />} />
         </Routes>
       </div>
     </BrowserRouter>

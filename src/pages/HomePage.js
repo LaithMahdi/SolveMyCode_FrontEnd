@@ -7,6 +7,7 @@ import AOS from "aos";
 import "../style/style.css";
 import Contact from "../components/Contact";
 import FooterCop from "../components/FooterCop";
+import Navbar from "../components/Navbar";
 
 function HomePage() {
   useEffect(() => {
@@ -18,6 +19,7 @@ function HomePage() {
   });
   return (
     <div className="mt-5">
+      <Navbar />
       <div
         className="row d-flex justify-content-start align-items-center"
         id="header"

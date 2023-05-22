@@ -37,7 +37,8 @@
     padding-bottom: 2.5rem;
 }
 #footer {
-    background: url(/public/assests/bg_2.png) center center no-repeat;
+    /* background: url(/public/assests/bg_2.png) center center no-repeat; */
+    background-color: #ffffff;
     background-size: cover;
 }
 #footer ul{

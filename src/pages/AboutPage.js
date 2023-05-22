@@ -1,7 +1,11 @@
 import React from "react";
+import FooterCop from "../components/FooterCop";
+import Navbar from "../components/Navbar";
 
 export default function AboutPage() {
   return (
+    <div style={{ backgroundColor: "#f6f6f6" }}>
+      <Navbar />
     <div className="container py-5 d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
       <div className="row">
         <div className="col-lg-6 d-flex flex-column align-items-start justify-content-center">
@@ -37,6 +41,9 @@ export default function AboutPage() {
           />
         </div>
       </div>
+      
+    </div>
+<FooterCop />
     </div>
   );
 }
