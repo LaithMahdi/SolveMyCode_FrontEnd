@@ -61,7 +61,7 @@ const QuestionsPage = () => {
   return (
     <div style={{ backgroundColor: "#f6f6f6" }}>
       <Navbar />
-      <div className="container mt-5">
+      <div className="container my-4">
         {loading ? (
           <div className="d-flex justify-content-center" style={{marginTop:"50vh"}}>
             <div className="spinner-border" role="status">

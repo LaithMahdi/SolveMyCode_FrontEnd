@@ -9,6 +9,7 @@ import {
 import {} from "react-router-dom";
 import axios from "axios";
 import CodeBlock from "../../components/CodeBlock";
+import Navbar from "../../components/Navbar";
 
 // import axios from "axios";
 
@@ -56,11 +57,12 @@ export default function Detail() {
         question: `/api/questions/${id}`,
       });
       console.log(response.data);
-
+      
       if (response.status === 201) {
         const newAnswer = response.data;
         setAnswers([...answers, newAnswer]);
         setContent("");
+        document.getElementById('closeBtn').click();
       }
     } catch (error) {
       console.error(error);
@@ -82,126 +84,131 @@ export default function Detail() {
   const timeAgo = getTimeAgo(date);
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col mt-5">
-          <nav
-            style={{ "--bs-breadcrumb-divider": ">" }}
-            aria-label="breadcrumb"
-          >
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <Link
-                  to="/question"
-                  className="text-decoration-none text-dark fw-bold"
-                >
-                  Question
-                </Link>
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                Detail
-              </li>
-            </ol>
-          </nav>
-        </div>
+    <div>
+      <Navbar />
 
+      <div className="container mt-5">
         <div className="row">
-          <div className="col">
-            <div className="box">
-              <div className="d-flex align-items-start justify-content-between">
-                <div className="text-start">
-                  <h4 className="fw-bold">{data.title}</h4>
-                  <p className="fw-normal text-muted">{timeAgo}</p>
-                </div>
-
-                <div>
-                  <button
-                    className="btn btn-outline-dark"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
+          <div className="col mt-5">
+            <nav
+              style={{ "--bs-breadcrumb-divider": ">" }}
+              aria-label="breadcrumb"
+            >
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link
+                    to="/question"
+                    className="text-decoration-none text-dark fw-bold"
                   >
-                    Answer to this question
-                  </button>
+                    Question
+                  </Link>
+                </li>
+                <li className="breadcrumb-item active" aria-current="page">
+                  Detail
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <div className="box">
+                <div className="d-flex align-items-start justify-content-between">
+                  <div className="text-start">
+                    <h4 className="fw-bold">{data.title}</h4>
+                    <p className="fw-normal text-muted">{timeAgo}</p>
+                  </div>
+
+                  <div>
+                    <button
+                      className="btn btn-outline-dark"
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                    >
+                      Answer to this question
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <hr></hr>
+                <hr></hr>
 
-              <div className="">
-                <CodeBlock code={data.content} />
-              </div>
-              <hr className="my-2" />
+                <div className="">
+                  <CodeBlock code={data.content} />
+                </div>
+                <hr className="my-2" />
 
-              <div className="float-start col-12">
-                <div className="m-2">
-                  <h5 className="fw-bold my-3">Answers : </h5>
-                  {answers.length > 0 ? (
-                    answers.map((answer) => (
-                      <div key={answer["@id"]}>
-                        <div className="d-flex text-secondary fst-normal">
-                          <p className="me-1">Added an answer on</p>
-                          <FormattedDate date={answer.dateOfCreation} />
+                <div className="float-start col-12">
+                  <div className="m-2">
+                    <h5 className="fw-bold my-3">Answers : </h5>
+                    {answers.length > 0 ? (
+                      answers.map((answer) => (
+                        <div key={answer["@id"]}>
+                          <div className="d-flex text-secondary fst-normal">
+                            <p className="me-1">Added an answer on</p>
+                            <FormattedDate date={answer.dateOfCreation} />
+                          </div>
+                          <CodeBlock code={answer.content} />
                         </div>
-                        <CodeBlock code={answer.content} />
+                      ))
+                    ) : (
+                      <div class="alert alert-dark" role="alert">
+                        No answers available.
                       </div>
-                    ))
-                  ) : (
-                    <div class="alert alert-dark" role="alert">
-                      No answers available.
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <section>
+          <div
+            className="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title fw-bold" id="staticBackdropLabel">
+                    Answer to this question
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    id="closeBtn"
+                  ></button>
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="m-3">
+                    <label className="mb-3">Add answer :</label>
+                    <textarea
+                      id="content"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                      className="form-control"
+                      required={true}
+                      style={{ whiteSpace: "pre-wrap" }}
+                      rows={10}
+                    />
+                  </div>
+                  <div className="text-end mx-3">
+                    <button type="submit" className="btn btn-dark mb-3">
+                      Add this answer
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <section>
-        <div
-          className="modal fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title fw-bold" id="staticBackdropLabel">
-                  Answer to this question
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <form onSubmit={handleSubmit}>
-                <div className="m-3">
-                  <label className="mb-3">Add answer :</label>
-                  <textarea
-                    id="content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    className="form-control"
-                    required={true}
-                    style={{ whiteSpace: "pre-wrap" }}
-                    rows={10}
-                  />
-                </div>
-                <div className="text-end mx-3">
-                  <button type="submit" className="btn btn-dark mb-3">
-                    Add this answer
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
