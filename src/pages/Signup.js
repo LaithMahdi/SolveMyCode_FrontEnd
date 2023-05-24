@@ -24,7 +24,7 @@ export default function Signup() {
       setUserName("");
       setPassword("");
       setAlert("Account created successfully!");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error(error);
       setAlert("Error creating account. Please try again.");

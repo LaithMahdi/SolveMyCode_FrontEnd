@@ -63,7 +63,10 @@ const QuestionsPage = () => {
       <Navbar />
       <div className="container my-4">
         {loading ? (
-          <div className="d-flex justify-content-center" style={{marginTop:"50vh"}}>
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginTop: "50vh" }}
+          >
             <div className="spinner-border" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
@@ -72,26 +75,14 @@ const QuestionsPage = () => {
           <div className="row d-flex justify-content-start">
             <h1 className="mt-5 fw-bold">List of questions</h1>
             <div className="col-md-8 col-lg-8 col-sm-12 col-12">
-
               {questions.map((question) => (
                 <div className="" key={question.id}>
-                  <div className="px-3 py-2 mb-3 border border-1 rounded-3 bg-white">
-                    <div>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="d-flex justify-content-start align-items-center">
-                        <h5
-                          className="fw-bold mt-2"
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            maxWidth: "100%",
-                          }}
-                        >
-                          {question.title}
-                         
-                        </h5>
-                        <div className="ms-2">
+                  <div className="rounded-2 border border-1 bg-white my-2 py-4 px-3">
+                    <div className="information">
+                      <div className="d-flex justify-content-between">
+                        <div className="d-flex">
+                          <h5>{question.title}</h5>
+                          <div className="ms-2">
                             {question.answers.length > 0 ? (
                               <i
                                 className="fa-solid fa-circle-check text-success"
@@ -109,53 +100,51 @@ const QuestionsPage = () => {
                           <button
                             className="dropdown-toggle"
                             type="button"
-                            id="dropdownMenuButton1"
                             data-bs-toggle="dropdown"
+                            id="dropdownMenuButton1"
                             aria-expanded="false"
                           >
                             <i className="fa-solid fa-ellipsis"></i>
                           </button>
                           <ul
                             className="dropdown-menu"
-                            aria-labelledby="dropdownMenuButton1"
+                            aria-labelledby={`dropdownMenuButton${question.id}`}
                           >
                             <li>
-                              <button className="dropdown-item">
+                          
                                 <Link
-                                  to={"/edit/" + question.id}
-                                  className="text-dark text-decoration-none"
+                                  to={`/edit/${question.id}`}
+                                  className="text-dark text-decoration-none dropdown-item"
                                 >
-                                  edit
+                                  Edit
                                 </Link>
-                              </button>
+                              
                             </li>
                             <li>
-                              <button className="dropdown-item">
-                                <Link
-                                  className="text-dark text-decoration-none"
-                                  onClick={() => handleDelete(question.id)}
-                                >
-                                  delete
-                                </Link>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => handleDelete(question.id)}
+                              >
+                                Delete
                               </button>
                             </li>
                           </ul>
                         </div>
                       </div>
 
-                      <p
-                        className=""
-                        style={{
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          maxWidth: "100%",
-                        }}
-                      >
-                        {question.content}
-                      </p>
-
-                      <div className="d-flex justify-content-end pb-2">
+                      <div className="paragraph">
+                        <p
+                          className="text-muted"
+                          style={{
+                            maxHeight: "3em",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {question.content}
+                        </p>
+                      </div>
+                      <div className="d-flex justify-content-end pb-1">
                         <Link
                           to={`/detail/${question.id}`}
                           className="text-decoration-none text-dark d-flex align-items-center fw-bold"
@@ -169,56 +158,63 @@ const QuestionsPage = () => {
                 </div>
               ))}
 
-                {/* Render the pagination */}
-        <div className="my-2 d-flex justify-content-center" id="pagination">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination">
-              <li
-                className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+              {/* Render the pagination */}
+              <div
+                className="my-2 d-flex justify-content-center"
+                id="pagination"
               >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                </button>
-              </li>
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination">
+                    <li
+                      className={`page-item ${
+                        currentPage === 1 ? "disabled" : ""
+                      }`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                      >
+                        <span aria-hidden="true">&laquo;</span>
+                      </button>
+                    </li>
 
-              {/* Render page numbers */}
-              {/* You can replace totalPages with the actual total number of pages */}
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <li
-                  key={index + 1}
-                  className={`page-item ${currentPage === index + 1 ? "active" : ""
-                    }`}
-                >
-                  <button
-                    className="page-link"
-                    onClick={() => handlePageChange(index + 1)}
-                  >
-                    {index + 1}
-                  </button>
-                </li>
-              ))}
+                    {/* Render page numbers */}
+                    {/* You can replace totalPages with the actual total number of pages */}
+                    {Array.from({ length: totalPages }).map((_, index) => (
+                      <li
+                        key={index + 1}
+                        className={`page-item ${
+                          currentPage === index + 1 ? "active" : ""
+                        }`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => handlePageChange(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      </li>
+                    ))}
 
-              <li
-                className={`page-item ${currentPage - 1 === totalPages - 1 ? "disabled" : ""
-                  }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+                    <li
+                      className={`page-item ${
+                        currentPage - 1 === totalPages - 1 ? "disabled" : ""
+                      }`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                      >
+                        <span aria-hidden="true">&raquo;</span>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </div>
 
             <div className="col-md-4 col-lg-4 col-sm-12 col-12 bg-white p-3 rounded rounded-2 border border-1 mb-5">
-            <h4 className="mt-2">Number of questions & answers</h4>
+              <h4 className="mt-2">Number of questions & answers</h4>
               <div className="d-flex justify-content-around my-3">
                 <div className="border border-2 rounded-3 me-2">
                   <div className="box text-center p-3">
@@ -238,8 +234,6 @@ const QuestionsPage = () => {
             </div>
           </div>
         )}
-
-      
       </div>
       <FooterCop />
     </div>

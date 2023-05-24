@@ -45,6 +45,7 @@ export default function Detail() {
 
     fetchAnswers();
   }, [id]);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
