@@ -78,8 +78,9 @@ const QuestionsPage = () => {
                   <div className="px-3 py-2 mb-3 border border-1 rounded-3 bg-white">
                     <div>
                       <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex justify-content-start align-items-center">
                         <h5
-                          className="fw-bold mt-2 d-flex justify-content-center align-items-center"
+                          className="fw-bold mt-2"
                           style={{
                             whiteSpace: "nowrap",
                             overflow: "hidden",
@@ -87,8 +88,10 @@ const QuestionsPage = () => {
                             maxWidth: "100%",
                           }}
                         >
-                          {question.title}{" "}
-                          <div className="ms-2">
+                          {question.title}
+                         
+                        </h5>
+                        <div className="ms-2">
                             {question.answers.length > 0 ? (
                               <i
                                 className="fa-solid fa-circle-check text-success"
@@ -101,7 +104,7 @@ const QuestionsPage = () => {
                               ></i>
                             )}
                           </div>
-                        </h5>
+                        </div>
                         <div className="dropdown">
                           <button
                             className="dropdown-toggle"
@@ -119,7 +122,6 @@ const QuestionsPage = () => {
                             <li>
                               <button className="dropdown-item">
                                 <Link
-                                  Link
                                   to={"/edit/" + question.id}
                                   className="text-dark text-decoration-none"
                                 >

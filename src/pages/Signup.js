@@ -24,9 +24,6 @@ export default function Signup() {
       setUserName("");
       setPassword("");
       setAlert("Account created successfully!");
-
-      
-
       navigate("/login");
     } catch (error) {
       console.error(error);
@@ -41,7 +38,7 @@ export default function Signup() {
           <div className="col-6">
             <div className="card p-5">
               <h3>Create an account</h3>
-              {alert && <div className="alert">{alert}</div>} {/* Render the alert message */}
+              {alert && <div className="alert alert-danger">{alert}</div>} {/* Render the alert message */}
 
               <form onSubmit={handleSubmit}>
                 <div>

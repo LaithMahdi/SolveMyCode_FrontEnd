@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../config/utils";
+import Navbar from "../../components/Navbar";
 
 const UpdatingQuestion = () => {
 const { id } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
-
+  const navigator = useNavigate();
   useEffect(() => {
     const fetchQuestionDetails = async () => {
       try {
@@ -46,6 +46,7 @@ const { id } = useParams();
       if (response.status === 200) {
         setDone(true);
         setError(false);
+        navigator('/question');
       } else {
         setError(true);
       }
@@ -57,55 +58,62 @@ const { id } = useParams();
   };
 
   return (
-    <div className="container mt-5">
+    <div>
+      <Navbar />
+      <div className="container mt-5">
         <div className="row">
-        <form
-      onSubmit={handleSubmit}
-      className="container mt-5 d-flex justify-content-center"
-    >
-      <div className="col-6">
-        {done && (
-          <div className="alert alert-success fw-bold" role="alert">
-            Question updated successfully!
-          </div>
-        )}
-        {error && (
-          <div className="alert alert-danger fw-bold" role="alert">
-            An error occurred while updating the question.
-          </div>
-        )}
+          <form
+            onSubmit={handleSubmit}
+            className="container mt-5 d-flex justify-content-center"
+          >
+            <div className="col-6">
+              {done && (
+                <div className="alert alert-success fw-bold" role="alert">
+                  Question updated successfully!
+                </div>
+              )}
+              {error && (
+                <div className="alert alert-danger fw-bold" role="alert">
+                  An error occurred while updating the question.
+                </div>
+              )}
 
-        <div>
-          <label className="my-2">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="form-control"
-          />
-        </div>
+              <div>
+                <h3>Edit your question</h3>
+                <label className="my-2">Title:</label>
+                <input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="form-control"
+                />
+              </div>
 
-        <div>
-          <label className="my-2">Content:</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="form-control"
-            rows={10}
-            cols={15}
-          />
-        </div>
+              <div>
+                <label className="my-2">Content:</label>
+                <textarea
+                  id="content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className="form-control"
+                  rows={10}
+                  cols={15}
+                />
+              </div>
 
-        <div>
-          <button type="submit" className="btn btn-primary my-3 fw-normal">
-            Update
-          </button>
+              <div>
+                <button
+                  type="submit"
+                  className="btn btn-primary my-3 fw-normal"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </form>
-        </div>
     </div>
   );
 };

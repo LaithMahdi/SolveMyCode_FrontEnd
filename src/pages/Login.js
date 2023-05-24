@@ -63,8 +63,11 @@ export default function Login() {
           style={{ height: "100vh" }}
         >
           <div className="col-6">
-            <div className="card p-5">
+            <div className="card p-5 shadow-sm">
               <h3>Welcome user</h3>
+              {loginError && (
+                  <p className="alert alert-danger">Invalid email or password</p>
+                )}
               <form onSubmit={handleSubmit}>
                 <div>
                   <label className="my-2">Username :</label>
@@ -90,16 +93,14 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <input type="submit" className="btn btn-dark my-3" />
+                  <div className="text-center"><input type="submit" className="btn btn-dark my-3" /></div>
 
                   <br />
                   <p className="text-center">
                     You don't have an account ? <Link to="/sign">Sign up</Link>
                   </p>
                 </div>
-                {loginError && (
-                  <p className="text-danger">Invalid email or password</p>
-                )}
+                
               </form>
             </div>
           </div>

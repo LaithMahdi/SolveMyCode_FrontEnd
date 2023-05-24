@@ -57,12 +57,12 @@ export default function Detail() {
         question: `/api/questions/${id}`,
       });
       console.log(response.data);
-      
+
       if (response.status === 201) {
         const newAnswer = response.data;
         setAnswers([...answers, newAnswer]);
         setContent("");
-        document.getElementById('closeBtn').click();
+        document.getElementById("closeBtn").click();
       }
     } catch (error) {
       console.error(error);
@@ -82,6 +82,19 @@ export default function Detail() {
   // format date
   const date = new Date(data.dateOfCreation);
   const timeAgo = getTimeAgo(date);
+
+  const handleDelete = async (answerID) => {
+    if (window.confirm("Are you sure you want to delete this answer?")) {
+      try {
+        await axios.delete(`${API_URL_ANSWSER}/${answerID}`);
+        setAnswers((prevAnswers) =>
+          prevAnswers.filter((answer) => answer.id !== answerID)
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <div>
@@ -113,20 +126,25 @@ export default function Detail() {
           <div className="row">
             <div className="col">
               <div className="box">
-                <div className="d-flex align-items-start justify-content-between">
+                <div className="">
                   <div className="text-start">
                     <h4 className="fw-bold">{data.title}</h4>
-                    <p className="fw-normal text-muted">{timeAgo}</p>
-                  </div>
 
-                  <div>
-                    <button
-                      className="btn btn-outline-dark"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
-                    >
-                      Answer to this question
-                    </button>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <p className="fw-normal text-muted">{timeAgo}</p>
+                      </div>
+                      <div>
+                        <button
+                          className="btn btn-outline-dark"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                        >   
+                        <i className="fa-solid fa-square-plus"></i>
+                          
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -143,9 +161,19 @@ export default function Detail() {
                     {answers.length > 0 ? (
                       answers.map((answer) => (
                         <div key={answer["@id"]}>
-                          <div className="d-flex text-secondary fst-normal">
-                            <p className="me-1">Added an answer on</p>
-                            <FormattedDate date={answer.dateOfCreation} />
+                          <div className="d-flex text-secondary fst-normal justify-content-between align-items-center">
+                            <div className="d-flex">
+                              <p className="me-1">Added an answer on</p> <br />
+                              <FormattedDate date={answer.dateOfCreation} />
+                            </div>
+                            <div>
+                              <button
+                                className="btn btn-outline-dark mb-2"
+                                onClick={() => handleDelete(answer.id)}
+                              >
+                                <i className="fa-solid fa-trash-can"></i>
+                              </button>
+                            </div>
                           </div>
                           <CodeBlock code={answer.content} />
                         </div>
